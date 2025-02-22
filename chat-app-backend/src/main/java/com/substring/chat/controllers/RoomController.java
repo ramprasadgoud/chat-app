@@ -4,7 +4,6 @@ import com.substring.chat.config.AppConstants;
 import com.substring.chat.entities.Message;
 import com.substring.chat.entities.Room;
 import com.substring.chat.repositories.RoomRepository;
-import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

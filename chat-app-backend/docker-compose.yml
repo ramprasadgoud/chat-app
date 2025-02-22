@@ -1,39 +1,40 @@
 
 
-  services:
-    mongo:
-      image: mongo:5.0
-      container_name: mongodb
-      ports:
-        - "27018:27017"
-      volumes:
-        - mongo-db:/data/db
-      networks:
-        - app-network
+services:
+  mongo:
+    image: mongo:5.0
+    container_name: mongodb
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-db:/data/db
+    networks:
+      - app-network
 
-    boot-app:
-      image: ramprasad041/chatback:latest
-      build:
-        context: .
-        dockerfile: Dockerfile
-      environment:
-        - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/chatapp
-      depends_on:
-        - mongo
-      networks:
-        - app-network
+  boot-app:
+    image: ramprasad041/chatback:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/chatapp
+    depends_on:
+      - mongo
+    networks:
+      - app-network
 
+  react-service:
+    image: ramprasad041/chatfront
+    build:
+      context: ../front-chat
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"  # Corrected port
+    networks:
+      - app-network
 
-  volumes:
-    mongo-db:
+volumes:
+  mongo-db:
 
-  networks:
-    app-network:
-
-
-# Hello this is ram prasad goud
-
-
-
-
-
+networks:
+  app-network:
